@@ -1,0 +1,57 @@
+<template name="MainLayout">
+    <h1><a href="/">Square One</a></h1>
+
+    {{> loginButtons}}
+
+    {{> Template.dynamic template=main}}
+</template>
+
+<template name="Index">
+    Hello
+    <a href="/stores">Stores</a>
+    {{#if currentUser}}
+        <a href="/create">Create Business</a>
+    {{/if}}
+</template>
+
+<template name="CreateStore">
+    <form class="createStore">
+        <input type="text" name="businessName" placeholder="Business name"/>
+        <input type="text" name="businessDesc" placeholder="Business description"/>
+        <input type="file" name="images" multiple>
+        <input type="text" name="businessLoc" placeholder="Main Location"/>
+        <input type="text" name="abn" placeholder="ABN (if applicable)"/>
+        <input type="text" name="businessPhone" placeholder="Phone number"/>
+        <input type="text" name="businessWebAddress" placeholder="Business Links (if applicable)"/>    
+        <input type="submit" value="Submit"/>    
+    </form>
+</template>
+
+<template name="StoresDirectory">
+    <ul>
+        {{#each stores}}
+            {{> StoreTile }}
+            <br>
+        {{/each}}
+    </ul>
+</template>
+
+<template name="StoreTile">
+    <li>
+        <ul>        
+            <li> {{name}} </li>
+            <li> {{description}} </li>
+            <li> {{location}} </li>
+            <li> {{contact}} </li>
+            <li> <a href="/stores/{{_id}}">Store Page</a> </li>
+            <li> <a href=http://{{link}}>{{link}}</a></li>
+        </ul>
+    </li>
+</template>
+
+<template name="StorePage">
+    <div>
+        <h1> {{store.name}} </h1>
+        <h3> {{store.description}} </h3>
+    </div>
+</template>
